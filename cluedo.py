@@ -1,0 +1,1 @@
+print ("Hola me llamo Fausto. Me encuentro investigando un crimen en el edificio de la UAx de Arapiles 13.Ocurrió el día 12 de octubre de 2023 (Día de la Hispanidad). Necesito tu ayuda para resolver este crimen. Remontemonos a los hechos. La víctima es: ")
