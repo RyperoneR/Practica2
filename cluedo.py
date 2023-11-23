@@ -2,21 +2,22 @@ print ("¡Bienvenidos a una emocionante noche llena de misterio y suspense! Est�
 print ("En este fascinante juego, se encuentran en la mansión de la familia Blackwood, una familia adinerada con un pasado turbio y oscuro. La noche ha caído, y la atmósfera está cargada de intriga. De repente, un grito rompe el silencio: el Sr. Blackwood, el patriarca de la familia, ha sido asesinado en circunstancias misteriosas.")
 print ("Ahora, ustedes, los valientes detectives, deben descubrir quién es el culpable, con qué arma cometieron el crimen y en qué habitación se llevó a cabo el asesinato. La mansión está llena de personajes sospechosos, cada uno con sus propios motivos y secretos ocultos.")
 print ("Prepárense para sumergirse en una noche llena de engaños, alianzas cambiantes y giros inesperados. En el Cluedo, cada movimiento cuenta, y cada pista puede ser crucial para resolver el misterio. ¡Buena suerte, detectives! La verdad espera ser descubierta, pero el reloj está en marcha y el asesino podría estar más cerca de lo que imaginan. ¡Que comience la investigación!")
+
 import random
 
 class CluedoGame:
     def __init__(self):
-        self.sospechosos = ["Sr. Verde", "Profesor Plum", "Sra. Blanco", "Sr. Amarillo", "Sra. Escarlata", "Col. Mostaza"]
-        self.lugares = {"Cocina": "En la cocina, encuentras un cuchillo ensangrentado.",
-                        "Sala de Estar": "En la sala de estar, ves huellas de barro en la alfombra.",
-                        "Comedor": "En el comedor, encuentras un veneno sospechoso.",
-                        "Estudio": "En el estudio, ves un sobre con dinero.",
-                        "Biblioteca": "En la biblioteca, encuentras un libro sobre envenenamiento.",
-                        "Pasillo": "En el pasillo, ves una sombra que se mueve rápidamente.",
-                        "Sala de Billar": "En la sala de billar, encuentras un objeto contundente.",
-                        "Salón de Baile": "En el salón de baile, encuentras una joya perdida.",
-                        "Invernadero": "En el invernadero, encuentras una cuerda extraña."}
-        self.armas = ["Candelabro", "Llave Inglesa", "Cuerda", "Cuchillo", "Llave Inglesa", "Revólver"]
+        self.sospechosos = ["Rodrigo", "Raúl", "Ana", "Juanjo", "Manuel", "Nicola","David", "Fausto","Jose Antonio"]
+        self.lugares = {"Azotea": "En la azotea te encuentras a Rodrigo fumando estresado.",
+                        "Salida de emergencia": "Sales por la salida de emergencia y te encuentras a Raúl trapicheando con unos chavalines. Estos se asustan con tu presencia y se van.",
+                        "Aula 404": "Llegas al aula 404, ela aula del grado en física. En ella está David explicandole a Victor la relación entre el grafeno las asíntotas.",
+                        "Baños": "Entras en el baño y te encuentras con Ana con los ojos inyectados en sangre y con la nariz roja por haber llorado.",
+                        "Recepción": "Cuando llegas a la recepción escuchas una buena bronca entre Nicola y el recepcionista. Parece que las pizarras que pidió Nicola para su clase aún no han llegado.",
+                        "Cafetería": "Entras en la cafetería, allí esta comiendo sentado en una mesa Manuel. No habla, solo sonrríe.",
+                        "Ascensor": "Estás esperando al ascensor, cuando finalmente llega este abre las puertas y de él sale José Antonio arrollandote.",
+                        "Biblioteca": "Entras en la biblioteca. Todo esta vacío y en silencio. Al fondo está Fausto programando en su ordenador.",
+                        "Cuarto de seguridad": "Llegas a la sala de seguridad. Allí esta Juanjo a oscuras echándose una partida de LOL en su portatil, a su lado una pantalla con todas las camaras de la universidad."}
+        self.armas = ["HP Prime", "Lápiz", "Máquina Expendedora", "G36", "Impresora 3D", "Cable HDMI"]
 
         self.asesino = None
         self.lugar_asesinato = None
@@ -48,7 +49,7 @@ class CluedoGame:
 
     def explorar_lugares(self):
         while self.juego_activo:
-            print("\nTe encuentras en la entrada de la mansión. Hay varios lugares para investigar:")
+            print("\nTe encuentras en la entrada del campus de la universidad Alfonso X el sabio de Arapiles. Hay varios lugares para investigar:")
             print(list(self.lugares.keys()))
 
             lugar_elegido = input("\nElige un lugar para investigar (o escribe 'salir' para terminar): ").capitalize()
