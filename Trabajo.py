@@ -15,7 +15,7 @@ class CluedoGame:
             "Biblioteca": "Entras en la biblioteca. Todo está vacío y en silencio. Al fondo está Fausto programando en su ordenador.",
             "Cuarto de seguridad": "Llegas a la sala de seguridad. Allí está Juanjo a oscuras echándose una partida de LOL en su portátil, a su lado una pantalla con todas las cámaras de la universidad."
         }
-        self.armas = ["HP Prime", "Lápiz", "Máquina Expendedora", "G36", "Impresora 3D", "Cable HDMI"]
+        self.armas = ["Calculadora", "Lápiz", "Máquina", "G36", "Impresora", "Cable"]
 
         # Seleccionar al azar el asesino, lugar del asesinato y arma utilizada
         self.asesino = random.choice(self.sospechosos)
@@ -26,6 +26,7 @@ class CluedoGame:
         self.juego_activo = True
         self.iniciar_juego()
 
+    # Función para iniciar el juego
     def iniciar_juego(self):
         print("¡Bienvenidos a una emocionante noche llena de misterio y suspense! Están a punto de sumergirse en el intrigante mundo del Cluedo, un juego de mesa clásico que desafiará sus habilidades deductivas y los transportará a una universidad llena de secretos y conspiraciones.")
         print("\nEn este fascinante juego, se encuentran en la Universidad Alfonso X El Sabio, el campus de Chamberí, donde se encuentran unos estudiantes con un pasado turbio y oscuro. La noche ha caído, y la atmósfera está cargada de intriga. De repente, un grito rompe el silencio: Gonzalo, el delegado de clase, ha sido asesinado en circunstancias misteriosas.")
@@ -44,6 +45,7 @@ class CluedoGame:
         lugar = lugar.capitalize()
         arma = arma.capitalize()
 
+        # Verificar si la acusación coincide con la solución del caso
         if sospechoso == self.asesino and lugar == self.lugar_asesinato and arma == self.arma_utilizada:
             print("¡Felicidades! Has resuelto el caso. El asesino era {} en {} con un(a) {}.".format(
                 self.asesino, self.lugar_asesinato, self.arma_utilizada))
@@ -53,6 +55,7 @@ class CluedoGame:
                 sospechoso, lugar, arma))
 
     def realizar_pregunta(self, tipo_pregunta):
+        # Determinar el tipo de pregunta y preparar la pregunta y opciones correspondientes
         if tipo_pregunta == "sospechoso":
             pregunta = "¿Sobre qué sospechoso quieres preguntar? "
             opciones = self.sospechosos
@@ -70,7 +73,9 @@ class CluedoGame:
             print(f"\nOpciones disponibles: {opciones}")
             eleccion = input(pregunta).capitalize()
 
-            if eleccion in opciones:
+            if tipo_pregunta == "arma" and eleccion not in self.armas:
+                print("Arma no válida. Inténtalo de nuevo.")
+            elif eleccion in opciones:
                 if tipo_pregunta == "sospechoso":
                     if eleccion == self.asesino:
                         print(f"\n{eleccion} es el principal sospechoso. ¡Cuidado!")
@@ -143,34 +148,44 @@ class CluedoGame:
         pregunta_realizada = False
 
         while self.juego_activo:
+            # Solicita al usuario que elija un lugar para investigar o escriba 'salir' para terminar el juego.
             lugar_elegido = input("\nElige un lugar para investigar (o escribe 'salir' para terminar): ").capitalize()
 
             if lugar_elegido.lower() == 'salir':
+                # Imprime un mensaje de despedida si el usuario elige salir y luego finaliza el juego.
                 print("Gracias por jugar. ¡Hasta la próxima!")
                 self.juego_activo = False
             elif lugar_elegido in self.lugares:
+                # Si el lugar elegido es válido, obtiene información sobre ese lugar.
                 self.obtener_informacion_lugar(lugar_elegido)
 
                 if not pregunta_realizada:
+                    # Si no se ha realizado una pregunta en esta iteración, ofrece opciones al jugador.
                     opcion = input("¿Quieres buscar otra sala (s), realizar una investigación (i) o hacer una pregunta (p)? ").lower()
                     if opcion == 's':
+                        # Si elige buscar otra sala, muestra la lista de lugares disponibles.
                         print("\nVolvamos a la lista de lugares disponibles:")
                         print(list(self.lugares.keys()))
                     elif opcion == 'i':
+                        # Si elige realizar una investigación, solicita información sobre el sospechoso, lugar y arma.
                         sospechoso = input("Ingresa el nombre del sospechoso: ").capitalize()
                         lugar = input("Ingresa el nombre del lugar: ").capitalize()
                         arma = input("Ingresa el arma utilizada: ").capitalize()
                         self.realizar_acusacion(sospechoso, lugar, arma)
                     elif opcion == 'p':
-                        tipo_pregunta = input("¿Quieres preguntar sobre un sospechoso (s), un lugar (l) o un arma (a)? ").lower()
+                        # Si elige hacer una pregunta, solicita el tipo de pregunta y realiza la pregunta.
+                        tipo_pregunta = input("¿Quieres preguntar sobre un sospechoso, un lugar o un arma? ").lower()
                         self.realizar_pregunta(tipo_pregunta)
                         pregunta_realizada = True
                     else:
+                        # Si la opción no es válida, imprime un mensaje y vuelve al menú principal.
                         print("Opción no válida. Volviendo al menú principal.")
                     pregunta_realizada = False  # Restablecer la variable después de cada pregunta
                 else:
+                    # Si ya se realizó una pregunta en esta iteración, imprime un mensaje indicando que no puede hacer otra pregunta.
                     print("No puedes hacer otra pregunta hasta que investigues otra sala.")
             else:
+                # Si el lugar elegido no es válido, imprime un mensaje y solicita que lo intente de nuevo.
                 print("Lugar no válido. Intenta de nuevo.")
 
 # Ejemplo de uso
